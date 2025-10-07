@@ -1032,6 +1032,271 @@
             overflow-y: auto;
         }
         
+        /* ===== NOVOS ESTILOS PARA A SEÇÃO DE CRESCIMENTO ===== */
+        .growth-tabs {
+            display: flex;
+            background-color: var(--light);
+            border-radius: var(--radius);
+            padding: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            flex-wrap: wrap;
+        }
+        
+        .growth-tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: var(--transition);
+            font-weight: 500;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            flex: 1;
+            min-width: 140px;
+            justify-content: center;
+        }
+        
+        .growth-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .growth-tab:hover:not(.active) {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+        
+        .growth-subsection {
+            display: none;
+        }
+        
+        .growth-subsection.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .growth-chart-container {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+        
+        .growth-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .growth-metric {
+            background: var(--light);
+            padding: 16px;
+            border-radius: var(--radius);
+            text-align: center;
+            border-left: 4px solid var(--success);
+        }
+        
+        .growth-metric.warning {
+            border-left-color: var(--danger);
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+        
+        .metric-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .metric-change {
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        
+        .positive {
+            color: var(--success);
+        }
+        
+        .negative {
+            color: var(--danger);
+        }
+        
+        .milestone-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .milestone-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary);
+        }
+        
+        .milestone-item {
+            position: relative;
+            margin-bottom: 24px;
+            padding: 16px;
+            background: var(--light);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .milestone-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 3px solid white;
+        }
+        
+        .milestone-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        
+        .milestone-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+        
+        .milestone-description {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .nutrition-item {
+            background: var(--light);
+            padding: 16px;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .sleep-chart {
+            background: var(--light);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 24px;
+        }
+        
+        .sleep-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .sleep-stat {
+            text-align: center;
+            padding: 16px;
+            background: white;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .comparison-item {
+            background: var(--light);
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+        
+        .alert-item {
+            display: flex;
+            align-items: center;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: var(--light);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--danger);
+        }
+        
+        .alert-item.warning {
+            border-left-color: var(--accent);
+        }
+        
+        .alert-item.info {
+            border-left-color: var(--secondary);
+        }
+        
+        .alert-icon {
+            margin-right: 12px;
+            font-size: 20px;
+        }
+        
+        .alert-content {
+            flex: 1;
+        }
+        
+        .alert-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .alert-description {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .report-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .report-option {
+            background: var(--light);
+            padding: 20px;
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .report-option:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .report-icon {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+        
         @media (max-width: 768px) {
             .dashboard-nav {
                 padding: 0 16px;
@@ -1065,6 +1330,15 @@
             
             .whatsapp-btn i {
                 font-size: 28px;
+            }
+            
+            .growth-tabs {
+                flex-direction: column;
+            }
+            
+            .growth-tab {
+                min-width: 100%;
+                justify-content: flex-start;
             }
         }
     </style>
@@ -1140,11 +1414,11 @@
                 <div class="nav-item" data-target="consultas">
                     <i class="fas fa-stethoscope"></i> Consultas
                 </div>
-                <div class="nav-item" data-target="enfermagem">
-                    <i class="fas fa-user-nurse"></i> Controlo de Enfermagem
-                </div>
                 <div class="nav-item" data-target="crescimento">
                     <i class="fas fa-chart-line"></i> Crescimento
+                </div>
+                <div class="nav-item" data-target="enfermagem">
+                    <i class="fas fa-user-nurse"></i> Controlo de Enfermagem
                 </div>
                 <div class="nav-item" data-target="exames">
                     <i class="fas fa-file-medical"></i> Exames
@@ -1825,6 +2099,472 @@
                     </div>
                 </div>
                 
+                <!-- CRESCIMENTO (NOVA SEÇÃO COMPLETA) -->
+                <div class="content-section" id="crescimento">
+                    <div class="section-header">
+                        <h2>Acompanhamento do Crescimento</h2>
+                        <p>Monitorize o desenvolvimento e crescimento da criança em tempo real</p>
+                    </div>
+                    
+                    <!-- Menu de Navegação Interna -->
+                    <div class="growth-tabs">
+                        <div class="growth-tab active" data-subsection="graficos">
+                            <i class="fas fa-chart-line"></i> Gráficos & Percentis
+                        </div>
+                        <div class="growth-tab" data-subsection="marcos">
+                            <i class="fas fa-baby"></i> Marcos
+                        </div>
+                        <div class="growth-tab" data-subsection="nutricao">
+                            <i class="fas fa-apple-alt"></i> Nutrição
+                        </div>
+                        <div class="growth-tab" data-subsection="sono">
+                            <i class="fas fa-bed"></i> Sono
+                        </div>
+                        <div class="growth-tab" data-subsection="avaliacoes">
+                            <i class="fas fa-clipboard-check"></i> Avaliações
+                        </div>
+                        <div class="growth-tab" data-subsection="comparativos">
+                            <i class="fas fa-exchange-alt"></i> Comparativos
+                        </div>
+                        <div class="growth-tab" data-subsection="alertas">
+                            <i class="fas fa-bell"></i> Alertas
+                        </div>
+                        <div class="growth-tab" data-subsection="relatorios">
+                            <i class="fas fa-file-pdf"></i> Relatórios
+                        </div>
+                    </div>
+                    
+                    <!-- Subseções do Crescimento -->
+                    <div class="growth-subsections">
+                        <!-- Gráficos & Percentis -->
+                        <div class="growth-subsection active" id="graficos">
+                            <div class="growth-metrics">
+                                <div class="growth-metric">
+                                    <div class="metric-value">12.5 kg</div>
+                                    <div class="metric-label">Peso Atual</div>
+                                    <div class="metric-change positive">+0.3 kg este mês</div>
+                                </div>
+                                <div class="growth-metric">
+                                    <div class="metric-value">88 cm</div>
+                                    <div class="metric-label">Altura Atual</div>
+                                    <div class="metric-change positive">+2 cm este mês</div>
+                                </div>
+                                <div class="growth-metric">
+                                    <div class="metric-value">48 cm</div>
+                                    <div class="metric-label">Perímetro Cefálico</div>
+                                    <div class="metric-change positive">+0.5 cm este mês</div>
+                                </div>
+                                <div class="growth-metric">
+                                    <div class="metric-value">75º</div>
+                                    <div class="metric-label">Percentil</div>
+                                    <div class="metric-change positive">+5º desde último controlo</div>
+                                </div>
+                            </div>
+                            
+                            <div class="growth-chart-container">
+                                <h3>Evolução do Crescimento</h3>
+                                <p>Comparação com curvas de referência da OMS</p>
+                                <div style="height: 300px; background: var(--light); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; margin: 20px 0;">
+                                    <div style="text-align: center;">
+                                        <i class="fas fa-chart-line" style="font-size: 48px; color: var(--primary); margin-bottom: 16px;"></i>
+                                        <p>Gráfico interativo de crescimento</p>
+                                        <small>Mostrando evolução de peso, altura e percentis</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline">
+                                        <i class="fas fa-weight"></i> Peso
+                                    </button>
+                                    <button class="btn btn-sm btn-outline">
+                                        <i class="fas fa-ruler-vertical"></i> Altura
+                                    </button>
+                                    <button class="btn btn-sm">
+                                        <i class="fas fa-brain"></i> Perímetro Cefálico
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Marcos do Desenvolvimento -->
+                        <div class="growth-subsection" id="marcos">
+                            <h3>Marcos do Desenvolvimento</h3>
+                            <p>Registo dos principais marcos alcançados pela criança</p>
+                            
+                            <div class="milestone-timeline">
+                                <div class="milestone-item">
+                                    <div class="milestone-date">Nov 2024</div>
+                                    <div class="milestone-title">Primeiras Frases Completas</div>
+                                    <div class="milestone-description">Começou a formar frases com 2-3 palavras. Exemplo: "Quero água mama"</div>
+                                </div>
+                                <div class="milestone-item">
+                                    <div class="milestone-date">Out 2024</div>
+                                    <div class="milestone-title">Correr Estável</div>
+                                    <div class="milestone-description">Consegue correr sem cair frequentemente. Melhor equilíbrio e coordenação.</div>
+                                </div>
+                                <div class="milestone-item">
+                                    <div class="milestone-date">Set 2024</div>
+                                    <div class="milestone-title">Identifica Cores</div>
+                                    <div class="milestone-description">Reconhece e nomeia cores primárias: vermelho, azul, amarelo.</div>
+                                </div>
+                                <div class="milestone-item">
+                                    <div class="milestone-date">Ago 2024</div>
+                                    <div class="milestone-title">Alimentação Autónoma</div>
+                                    <div class="milestone-description">Começa a usar colher sozinha com maior precisão.</div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn mt-4">
+                                <i class="fas fa-plus"></i> Adicionar Novo Marco
+                            </button>
+                        </div>
+                        
+                        <!-- Nutrição & Alimentação -->
+                        <div class="growth-subsection" id="nutricao">
+                            <h3>Controlo Nutricional</h3>
+                            <p>Acompanhamento da alimentação e nutrição da criança</p>
+                            
+                            <div class="nutrition-grid">
+                                <div class="nutrition-item">
+                                    <h4>🍎 Apetite</h4>
+                                    <p>Bom apetite, come bem a maioria dos alimentos</p>
+                                    <div class="metric-change positive">Estável</div>
+                                </div>
+                                <div class="nutrition-item">
+                                    <h4>💧 Hidratação</h4>
+                                    <p>Bebe aproximadamente 1L de água por dia</p>
+                                    <div class="metric-change positive">Adequado</div>
+                                </div>
+                                <div class="nutrition-item">
+                                    <h4>🥛 Lacticínios</h4>
+                                    <p>Consome 3 porções diárias</p>
+                                    <div class="metric-change positive">Recomendado</div>
+                                </div>
+                                <div class="nutrition-item">
+                                    <h4>🥦 Vegetais</h4>
+                                    <p>Alguma resistência a vegetais verdes</p>
+                                    <div class="metric-change negative">A melhorar</div>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-card mt-4">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-utensils"></i> Diário Alimentar - Hoje</h3>
+                                </div>
+                                <div class="card-content">
+                                    <ul class="card-list">
+                                        <li>
+                                            <div class="list-item-content">
+                                                <strong>Pequeno-almoço</strong>
+                                                <p>Leite com cereais, 1/2 maçã</p>
+                                                <small>08:30 - Comeu tudo</small>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="list-item-content">
+                                                <strong>Almoço</strong>
+                                                <p>Frango grelhado, arroz, brócolos</p>
+                                                <small>12:45 - Comeu 80%, rejeitou brócolos</small>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="list-item-content">
+                                                <strong>Lanche</strong>
+                                                <p>Iogurte, bolacha Maria</p>
+                                                <small>16:00 - Comeu tudo</small>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-outline btn-block mt-4">
+                                        <i class="fas fa-edit"></i> Editar Diário
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sono & Descanso -->
+                        <div class="growth-subsection" id="sono">
+                            <h3>Padrões de Sono</h3>
+                            <p>Monitorização da qualidade e duração do sono</p>
+                            
+                            <div class="sleep-stats">
+                                <div class="sleep-stat">
+                                    <div class="metric-value">10.5h</div>
+                                    <div class="metric-label">Sono Noturno</div>
+                                </div>
+                                <div class="sleep-stat">
+                                    <div class="metric-value">2.5h</div>
+                                    <div class="metric-label">Sestas</div>
+                                </div>
+                                <div class="sleep-stat">
+                                    <div class="metric-value">13h</div>
+                                    <div class="metric-label">Total Diário</div>
+                                </div>
+                                <div class="sleep-stat">
+                                    <div class="metric-value">⭐ 4.2/5</div>
+                                    <div class="metric-label">Qualidade</div>
+                                </div>
+                            </div>
+                            
+                            <div class="sleep-chart">
+                                <h4>Padrão de Sono Semanal</h4>
+                                <div style="height: 200px; background: white; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; margin: 16px 0;">
+                                    <div style="text-align: center;">
+                                        <i class="fas fa-moon" style="font-size: 36px; color: var(--primary); margin-bottom: 12px;"></i>
+                                        <p>Gráfico de padrões de sono</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-card mt-4">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-bed"></i> Rotina de Sono</h3>
+                                </div>
+                                <div class="card-content">
+                                    <ul class="card-list">
+                                        <li>
+                                            <div class="list-item-content">
+                                                <strong>Deita-se</strong>
+                                                <p>20:30 - 21:00</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="list-item-content">
+                                                <strong>Acorda</strong>
+                                                <p>07:00 - 07:30</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="list-item-content">
+                                                <strong>Sestas</strong>
+                                                <p>1 sesta de 2-3 horas após almoço</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Avaliações Mensais -->
+                        <div class="growth-subsection" id="avaliacoes">
+                            <h3>Avaliações Mensais</h3>
+                            <p>Registo detalhado das avaliações de crescimento</p>
+                            
+                            <div class="cards-grid">
+                                <div class="dashboard-card">
+                                    <div class="card-header">
+                                        <h3><i class="fas fa-clipboard-list"></i> Última Avaliação</h3>
+                                        <span class="card-badge">Nov 2024</span>
+                                    </div>
+                                    <div class="card-content">
+                                        <div class="growth-metrics">
+                                            <div class="growth-metric">
+                                                <div class="metric-value">12.5 kg</div>
+                                                <div class="metric-label">Peso</div>
+                                            </div>
+                                            <div class="growth-metric">
+                                                <div class="metric-value">88 cm</div>
+                                                <div class="metric-label">Altura</div>
+                                            </div>
+                                            <div class="growth-metric">
+                                                <div class="metric-value">16.1</div>
+                                                <div class="metric-label">IMC</div>
+                                            </div>
+                                        </div>
+                                        <p><strong>Observações:</strong> Crescimento dentro dos parâmetros normais. Desenvolvimento adequado para a idade.</p>
+                                        <p><strong>Próxima avaliação:</strong> 15 Dez 2024</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="dashboard-card">
+                                    <div class="card-header">
+                                        <h3><i class="fas fa-history"></i> Histórico</h3>
+                                    </div>
+                                    <div class="card-content">
+                                        <ul class="card-list">
+                                            <li>
+                                                <div class="list-item-content">
+                                                    <strong>Out 2024</strong>
+                                                    <p>Peso: 12.2 kg | Altura: 86 cm</p>
+                                                    <small>Dra. Maria Costa</small>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="list-item-content">
+                                                    <strong>Set 2024</strong>
+                                                    <p>Peso: 11.8 kg | Altura: 84 cm</p>
+                                                    <small>Dra. Maria Costa</small>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="list-item-content">
+                                                    <strong>Ago 2024</strong>
+                                                    <p>Peso: 11.5 kg | Altura: 83 cm</p>
+                                                    <small>Dr. João Santos</small>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Comparativos -->
+                        <div class="growth-subsection" id="comparativos">
+                            <h3>Comparativos</h3>
+                            <p>Comparação com referências e histórico familiar</p>
+                            
+                            <div class="comparison-grid">
+                                <div class="comparison-item">
+                                    <h4>📊 Comparação com Irmão</h4>
+                                    <p>Na mesma idade, o irmão pesava 12.8kg</p>
+                                    <div class="metric-change negative">-0.3kg</div>
+                                </div>
+                                <div class="comparison-item">
+                                    <h4>👨‍👩‍👧‍👦 Média Familiar</h4>
+                                    <p>Altura próxima da média familiar</p>
+                                    <div class="metric-change positive">Alinhada</div>
+                                </div>
+                                <div class="comparison-item">
+                                    <h4>📈 Curva OMS</h4>
+                                    <p>No percentil 75 da OMS</p>
+                                    <div class="metric-change positive">Acima da média</div>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-card mt-4">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-chart-bar"></i> Evolução Anual</h3>
+                                </div>
+                                <div class="card-content">
+                                    <div style="height: 200px; background: var(--light); border-radius: var(--radius); display: flex; align-items: center; justify-content: center;">
+                                        <div style="text-align: center;">
+                                            <i class="fas fa-chart-bar" style="font-size: 36px; color: var(--primary); margin-bottom: 12px;"></i>
+                                            <p>Gráfico comparativo anual</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Alertas -->
+                        <div class="growth-subsection" id="alertas">
+                            <h3>Alertas Inteligentes</h3>
+                            <p>Notificações e recomendações baseadas no crescimento</p>
+                            
+                            <div class="alert-item warning">
+                                <div class="alert-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <div class="alert-title">Consulta de Rotina Próxima</div>
+                                    <div class="alert-description">Próxima avaliação de crescimento em 15 dias</div>
+                                </div>
+                            </div>
+                            
+                            <div class="alert-item info">
+                                <div class="alert-icon">
+                                    <i class="fas fa-info-circle"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <div class="alert-title">Marcos Esperados</div>
+                                    <div class="alert-description">Nos próximos meses: frases mais complexas, saltar com os dois pés</div>
+                                </div>
+                            </div>
+                            
+                            <div class="alert-item">
+                                <div class="alert-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <div class="alert-title">Atenção à Alimentação</div>
+                                    <div class="alert-description">Variedade de vegetais abaixo do recomendado</div>
+                                </div>
+                            </div>
+                            
+                            <div class="alert-item info">
+                                <div class="alert-icon">
+                                    <i class="fas fa-moon"></i>
+                                </div>
+                                <div class="alert-content">
+                                    <div class="alert-title">Padrão de Sono Estável</div>
+                                    <div class="alert-description">Horas de sono dentro do recomendado para a idade</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Relatórios -->
+                        <div class="growth-subsection" id="relatorios">
+                            <h3>Relatórios e Exportações</h3>
+                            <p>Gere relatórios detalhados do crescimento</p>
+                            
+                            <div class="report-options">
+                                <div class="report-option">
+                                    <div class="report-icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div class="report-title">Relatório Completo</div>
+                                    <div class="report-description">PDF com todos os dados de crescimento</div>
+                                </div>
+                                
+                                <div class="report-option">
+                                    <div class="report-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div class="report-title">Gráficos</div>
+                                    <div class="report-description">Exportar gráficos de crescimento</div>
+                                </div>
+                                
+                                <div class="report-option">
+                                    <div class="report-icon">
+                                        <i class="fas fa-history"></i>
+                                    </div>
+                                    <div class="report-title">Histórico</div>
+                                    <div class="report-description">Registo completo desde o nascimento</div>
+                                </div>
+                                
+                                <div class="report-option">
+                                    <div class="report-icon">
+                                        <i class="fas fa-print"></i>
+                                    </div>
+                                    <div class="report-title">Para Pediatra</div>
+                                    <div class="report-description">Relatório específico para consulta</div>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-card mt-4">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-download"></i> Exportar Dados</h3>
+                                </div>
+                                <div class="card-content">
+                                    <div class="form-group">
+                                        <label>Período</label>
+                                        <select class="form-control">
+                                            <option>Últimos 3 meses</option>
+                                            <option>Últimos 6 meses</option>
+                                            <option>Último ano</option>
+                                            <option>Desde o nascimento</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Formato</label>
+                                        <select class="form-control">
+                                            <option>PDF</option>
+                                            <option>Excel</option>
+                                            <option>CSV</option>
+                                            <option>Imagem</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <button class="btn btn-block">
+                                        <i class="fas fa-file-export"></i> Gerar Relatório
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <!-- Controlo de Enfermagem (MANTIDO ORIGINAL) -->
                 <div class="content-section" id="enfermagem">
                     <div class="section-header">
@@ -2049,11 +2789,8 @@
                 
                 <!-- As outras seções (MANTIDAS ORIGINAIS) -->
                 <div class="text-center mt-4">
-                    <p>As demais seções (Crescimento, Exames) seguem o mesmo padrão de design.</p>
+                    <p>A seção de Exames segue o mesmo padrão de design.</p>
                     <div class="d-flex justify-between align-center gap-2 mt-4" style="max-width: 500px; margin: 0 auto;">
-                        <button class="btn btn-outline" data-target="crescimento">
-                            <i class="fas fa-chart-line"></i> Crescimento
-                        </button>
                         <button class="btn btn-outline" data-target="exames">
                             <i class="fas fa-file-medical"></i> Exames
                         </button>
@@ -2513,6 +3250,35 @@
             }
         });
         /* ===== FIM: JAVASCRIPT PARA A SEÇÃO DE CONSULTAS ===== */
+
+        /* ===== INÍCIO: JAVASCRIPT PARA A SEÇÃO DE CRESCIMENTO ===== */
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navegação por abas na seção de crescimento
+            const growthTabs = document.querySelectorAll('.growth-tab');
+            const growthSubsections = document.querySelectorAll('.growth-subsection');
+            
+            growthTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.getAttribute('data-subsection');
+                    
+                    growthTabs.forEach(t => t.classList.remove('active'));
+                    growthSubsections.forEach(s => s.classList.remove('active'));
+                    
+                    this.classList.add('active');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+            
+            // Simulação de dados de crescimento
+            function updateGrowthMetrics() {
+                // Em uma aplicação real, isto viria de uma API
+                console.log('Métricas de crescimento atualizadas');
+            }
+            
+            // Inicializar métricas
+            updateGrowthMetrics();
+        });
+        /* ===== FIM: JAVASCRIPT PARA A SEÇÃO DE CRESCIMENTO ===== */
     </script>
 </body>
 </html>
