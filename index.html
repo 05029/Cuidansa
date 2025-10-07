@@ -1000,6 +1000,38 @@
         }
         /* ===== FIM: ESTILOS PARA REGISTO DE SINTOMAS DIÁRIO ===== */
         
+        /* ===== ESTILOS PARA A SEÇÃO DE CONSULTAS ===== */
+        .consultation-card {
+            border-left: 4px solid #9C27B0;
+        }
+        
+        .appointment-form {
+            margin-top: 16px;
+        }
+        
+        .appointment-summary {
+            background-color: var(--primary-light);
+            padding: 16px;
+            border-radius: var(--radius);
+            margin-top: 16px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .appointment-summary h4 {
+            margin-bottom: 8px;
+            color: var(--primary-dark);
+        }
+        
+        .appointment-summary p {
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        
+        .consultation-history {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
         @media (max-width: 768px) {
             .dashboard-nav {
                 padding: 0 16px;
@@ -1091,7 +1123,7 @@
                 </button>
             </div>
             
-            <!-- NAVEGAÇÃO ATUALIZADA COM LEMBRETES INTELIGENTES -->
+            <!-- NAVEGAÇÃO ATUALIZADA COM CONSULTAS -->
             <div class="dashboard-nav">
                 <div class="nav-item active" data-target="vacinas">
                     <i class="fas fa-syringe"></i> Vacinas
@@ -1612,7 +1644,188 @@
                     </div>
                 </div>
                 
-                <!-- Controlo de Enfermagem (ATUALIZADO COM REGISTO DE SINTOMAS) -->
+                <!-- CONSULTAS (NOVA SEÇÃO COMPLETA) -->
+                <div class="content-section" id="consultas">
+                    <div class="section-header">
+                        <h2>Gestão de Consultas</h2>
+                        <p>Agende e acompanhe todas as consultas médicas da criança</p>
+                    </div>
+                    
+                    <div class="cards-grid">
+                        <!-- PRÓXIMAS CONSULTAS -->
+                        <div class="dashboard-card consultation-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-calendar-check"></i> Próximas Consultas</h3>
+                                <span class="card-badge">3 Agendadas</span>
+                            </div>
+                            <div class="card-content">
+                                <ul class="card-list">
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Consulta de Rotina - Pediatria</strong>
+                                            <p>15 Dez 2024, 14:30 | Dra. Maria Costa</p>
+                                            <small>Hospital Central - Sala 204</small>
+                                            <small><i class="fas fa-map-marker-alt"></i> Piso 2, Ala Pediátrica</small>
+                                        </div>
+                                        <span class="status status-pending">Confirmada</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Avaliação de Desenvolvimento</strong>
+                                            <p>20 Jan 2025, 10:00 | Dr. João Santos</p>
+                                            <small>Centro de Saúde Norte</small>
+                                            <small><i class="fas fa-clock"></i> Duração: 45min</small>
+                                        </div>
+                                        <span class="status status-pending">Por confirmar</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Oftalmologia - Checkup</strong>
+                                            <p>05 Fev 2025, 11:15 | Dra. Ana Lima</p>
+                                            <small>Clínica Vista+</small>
+                                            <small><i class="fas fa-sticky-note"></i> Levar exames anteriores</small>
+                                        </div>
+                                        <span class="status status-pending">Agendada</span>
+                                    </li>
+                                </ul>
+                                <button class="btn btn-block mt-4">
+                                    <i class="fas fa-video"></i> Entrar em Videochamada
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- HISTÓRICO DE CONSULTAS -->
+                        <div class="dashboard-card consultation-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-history"></i> Histórico de Consultas</h3>
+                            </div>
+                            <div class="card-content consultation-history">
+                                <ul class="card-list">
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Consulta Urgente - Febre</strong>
+                                            <p>10 Nov 2024, 16:00 | Dra. Sofia Martins</p>
+                                            <small>Diagnóstico: Infeção viral</small>
+                                            <small><i class="fas fa-file-medical"></i> Receita emitida</small>
+                                        </div>
+                                        <span class="status status-completed">Realizada</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Vacinação + Checkup</strong>
+                                            <p>15 Out 2024, 09:30 | Enf. Carolina Santos</p>
+                                            <small>Peso: 12.5kg | Altura: 88cm</small>
+                                            <small><i class="fas fa-syringe"></i> VASPR administrada</small>
+                                        </div>
+                                        <span class="status status-completed">Realizada</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Consulta de Rotina</strong>
+                                            <p>01 Set 2024, 15:45 | Dra. Maria Costa</p>
+                                            <small>Avaliação positiva do desenvolvimento</small>
+                                            <small><i class="fas fa-heart"></i> Sinais vitais normais</small>
+                                        </div>
+                                        <span class="status status-completed">Realizada</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Dermatologia - Alergia</strong>
+                                            <p>15 Ago 2024, 11:00 | Dr. Rui Pereira</p>
+                                            <small>Diagnóstico: Dermatite atópica</small>
+                                            <small><i class="fas fa-prescription-bottle"></i> Pomada prescrita</small>
+                                        </div>
+                                        <span class="status status-completed">Realizada</span>
+                                    </li>
+                                </ul>
+                                <button class="btn btn-outline btn-block mt-4">
+                                    <i class="fas fa-download"></i> Descarregar Histórico Completo
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- AGENDAR NOVA CONSULTA -->
+                        <div class="dashboard-card consultation-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-calendar-plus"></i> Agendar Nova Consulta</h3>
+                            </div>
+                            <div class="card-content">
+                                <div class="appointment-form">
+                                    <div class="form-group">
+                                        <label>Tipo de Consulta</label>
+                                        <select class="form-control" id="consulta-type">
+                                            <option>Pediatria - Rotina</option>
+                                            <option>Pediatria - Urgência</option>
+                                            <option>Oftalmologia</option>
+                                            <option>Dermatologia</option>
+                                            <option>Ortopedia</option>
+                                            <option>Nutrição</option>
+                                            <option>Outra Especialidade</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Médico/Profissional</label>
+                                        <select class="form-control" id="medico-select">
+                                            <option>Dra. Maria Costa - Pediatra</option>
+                                            <option>Dr. João Santos - Pediatra</option>
+                                            <option>Dra. Ana Lima - Oftalmologista</option>
+                                            <option>Dr. Pedro Silva - Ortopedista</option>
+                                            <option>Qualquer disponível</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Local Preferencial</label>
+                                        <select class="form-control" id="local-select">
+                                            <option>Hospital Central</option>
+                                            <option>Centro de Saúde Norte</option>
+                                            <option>Clínica Vista+</option>
+                                            <option>Consulta Online</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Data Preferida</label>
+                                        <input type="date" class="form-control" id="appointment-date" min="2024-11-16">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Horário Preferido</label>
+                                        <select class="form-control" id="appointment-time">
+                                            <option>Manhã (09:00-12:00)</option>
+                                            <option>Tarde (14:00-17:00)</option>
+                                            <option>Sem preferência</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Motivo da Consulta</label>
+                                        <textarea class="form-control" id="appointment-reason" rows="3" placeholder="Descreva o motivo da consulta..."></textarea>
+                                    </div>
+                                    
+                                    <button class="btn btn-block mt-4" id="schedule-appointment">
+                                        <i class="fas fa-calendar-check"></i> Verificar Disponibilidade
+                                    </button>
+                                    
+                                    <div class="appointment-summary" id="appointment-summary" style="display: none;">
+                                        <h4>Resumo do Agendamento</h4>
+                                        <p><strong>Tipo:</strong> <span id="summary-type"></span></p>
+                                        <p><strong>Médico:</strong> <span id="summary-doctor"></span></p>
+                                        <p><strong>Local:</strong> <span id="summary-location"></span></p>
+                                        <p><strong>Data:</strong> <span id="summary-date"></span></p>
+                                        <p><strong>Horário:</strong> <span id="summary-time"></span></p>
+                                        <button class="btn btn-secondary btn-block mt-3">
+                                            <i class="fas fa-check"></i> Confirmar Agendamento
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Controlo de Enfermagem (MANTIDO ORIGINAL) -->
                 <div class="content-section" id="enfermagem">
                     <div class="section-header">
                         <h2>Controlo de Enfermagem</h2>
@@ -1836,11 +2049,8 @@
                 
                 <!-- As outras seções (MANTIDAS ORIGINAIS) -->
                 <div class="text-center mt-4">
-                    <p>As demais seções (Consultas, Crescimento, Exames) seguem o mesmo padrão de design.</p>
+                    <p>As demais seções (Crescimento, Exames) seguem o mesmo padrão de design.</p>
                     <div class="d-flex justify-between align-center gap-2 mt-4" style="max-width: 500px; margin: 0 auto;">
-                        <button class="btn btn-outline" data-target="consultas">
-                            <i class="fas fa-stethoscope"></i> Consultas
-                        </button>
                         <button class="btn btn-outline" data-target="crescimento">
                             <i class="fas fa-chart-line"></i> Crescimento
                         </button>
@@ -2234,6 +2444,75 @@
             });
         });
         /* ===== FIM: JAVASCRIPT PARA REGISTO DE SINTOMAS ===== */
+
+        /* ===== INÍCIO: JAVASCRIPT PARA A SEÇÃO DE CONSULTAS ===== */
+        document.addEventListener('DOMContentLoaded', function() {
+            // Funcionalidade para agendar consultas
+            const scheduleButton = document.getElementById('schedule-appointment');
+            const appointmentSummary = document.getElementById('appointment-summary');
+            
+            if (scheduleButton) {
+                scheduleButton.addEventListener('click', function() {
+                    const type = document.getElementById('consulta-type').value;
+                    const doctor = document.getElementById('medico-select').value;
+                    const location = document.getElementById('local-select').value;
+                    const date = document.getElementById('appointment-date').value;
+                    const time = document.getElementById('appointment-time').value;
+                    const reason = document.getElementById('appointment-reason').value;
+                    
+                    // Validação básica
+                    if (!date) {
+                        alert('Por favor, selecione uma data para a consulta.');
+                        return;
+                    }
+                    
+                    if (!reason.trim()) {
+                        alert('Por favor, descreva o motivo da consulta.');
+                        return;
+                    }
+                    
+                    // Atualizar resumo
+                    document.getElementById('summary-type').textContent = type;
+                    document.getElementById('summary-doctor').textContent = doctor;
+                    document.getElementById('summary-location').textContent = location;
+                    document.getElementById('summary-date').textContent = new Date(date).toLocaleDateString('pt-PT');
+                    document.getElementById('summary-time').textContent = time;
+                    
+                    // Mostrar resumo
+                    appointmentSummary.style.display = 'block';
+                    
+                    // Rolar para o resumo
+                    appointmentSummary.scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+            
+            // Funcionalidade para confirmar agendamento
+            const confirmButton = document.querySelector('#appointment-summary .btn-secondary');
+            if (confirmButton) {
+                confirmButton.addEventListener('click', function() {
+                    alert('Consulta agendada com sucesso! Receberá uma confirmação por email.');
+                    // Aqui normalmente enviaria os dados para o servidor
+                    
+                    // Limpar formulário
+                    document.getElementById('consulta-type').selectedIndex = 0;
+                    document.getElementById('medico-select').selectedIndex = 0;
+                    document.getElementById('local-select').selectedIndex = 0;
+                    document.getElementById('appointment-date').value = '';
+                    document.getElementById('appointment-time').selectedIndex = 0;
+                    document.getElementById('appointment-reason').value = '';
+                    appointmentSummary.style.display = 'none';
+                });
+            }
+            
+            // Botão de videochamada
+            const videoCallButton = document.querySelector('#consultas .btn-block');
+            if (videoCallButton) {
+                videoCallButton.addEventListener('click', function() {
+                    alert('A funcionalidade de videochamada será ativada 15 minutos antes da consulta.');
+                });
+            }
+        });
+        /* ===== FIM: JAVASCRIPT PARA A SEÇÃO DE CONSULTAS ===== */
     </script>
 </body>
 </html>
