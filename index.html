@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuidança - Sistema Hospitalar Pediátrico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #FF6B8B;
+            --primary-dark: #E05575;
+            --primary-light: #FFE4EC;
+            --secondary: #4ECDC4;
+            --secondary-dark: #3DB8B0;
+            --accent: #FFD166;
+            --danger: #EF476F;
+            --danger-dark: #D43D63;
+            --success: #06D6A0;
+            --light: #F8F9FA;
+            --dark: #2C3E50;
+            --gray: #6C757D;
+            --gray-light: #E9ECEF;
+            --border: #DEE2E6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+        }
+        
+        /* Cards Principais */
+        .login-card, .dashboard {
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .dashboard {
+            display: none;
+        }
+        
+        .dashboard.active {
+            display: block;
+        }
+        
+        /* Header do Dashboard */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .child-info h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .child-info p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        
+        .child-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary);
+            margin-right: 16px;
+        }
+        
+        .logout-btn {
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Navegação */
+        .dashboard-nav {
+            display: flex;
+            background-color: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px;
+            overflow-x: auto;
+        }
+        
+        .nav-item {
+            padding: 16px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            font-weight: 500;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .nav-item:hover:not(.active) {
+            color: var(--primary-dark);
+            background-color: var(--primary-light);
+        }
+        
+        /* Conteúdo Principal */
+        .dashboard-content {
+            padding: 32px;
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .section-header {
+            margin-bottom: 24px;
+        }
+        
+        .section-header h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+        
+        /* Grid de Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            padding: 20px 20px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card-badge {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        /* Listas */
+        .card-list {
+            list-style-type: none;
+        }
+        
+        .card-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .card-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .list-item-content {
+            flex: 1;
+        }
+        
+        .list-item-content strong {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--dark);
+        }
+        
+        .list-item-content p {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 4px;
+        }
+        
+        .list-item-content small {
+            font-size: 12px;
+            color: var(--gray);
+        }
+        
+        /* Estados */
+        .status {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            margin-left: 12px;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background-color: #d1edff;
+            color: var(--primary);
+        }
+        
+        .status-cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* Botões */
+        .btn {
+            padding: 10px 18px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+        
+        /* Tela de Login */
+        .login-card {
+            max-width: 440px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .logo h1 {
+            color: var(--primary);
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .logo p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        .login-form {
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 139, 0.1);
+        }
+        
+        .demo-info {
+            margin-top: 24px;
+            padding: 16px;
+            background-color: var(--primary-light);
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--primary-dark);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .demo-info p {
+            margin-bottom: 6px;
+        }
+        
+        .demo-credentials {
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            color: var(--gray);
+            font-size: 14px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer p {
+            margin-bottom: 4px;
+        }
+        
+        /* Popups */
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+        
+        .popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-content {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 32px;
+            text-align: center;
+            max-width: 440px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            animation: popIn 0.4s ease;
+        }
+        
+        @keyframes popIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .popup-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+        }
+        
+        .error .popup-icon {
+            color: var(--danger);
+        }
+        
+        .success .popup-icon {
+            color: var(--success);
+        }
+        
+        .popup h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .popup p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .countdown {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* Botão WhatsApp */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 999;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .whatsapp-btn i {
+            color: white;
+            font-size: 32px;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        .whatsapp-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background-color: var(--dark);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+            pointer-events: none;
+        }
+        
+        .whatsapp-btn:hover .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Utilitários */
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-4 {
+            margin-top: 24px;
+        }
+        
+        .mb-4 {
+            margin-bottom: 24px;
+        }
+        
+        .d-flex {
+            display: flex;
+        }
+        
+        .justify-between {
+            justify-content: space-between;
+        }
+        
+        .align-center {
+            align-items: center;
+        }
+        
+        .gap-2 {
+            gap: 16px;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .dashboard-nav {
+                padding: 0 16px;
+            }
+            
+            .dashboard-content {
+                padding: 24px 16px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-header {
+                padding: 20px 16px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .logout-btn {
+                align-self: flex-end;
+            }
+            
+            .whatsapp-btn {
+                bottom: 16px;
+                right: 16px;
+                width: 56px;
+                height: 56px;
+            }
+            
+            .whatsapp-btn i {
+                font-size: 28px;
+            }
+        }
+        
+        /* Estilos específicos para crianças */
+        .child-details {
+            display: flex;
+            align-items: center;
+        }
+        
+        .vaccine-card {
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .medicine-card {
+            border-left: 4px solid var(--accent);
+        }
+        
+        .nursing-card {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .growth-card {
+            border-left: 4px solid var(--success);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tela de Login -->
+        <div class="login-card" id="loginCard">
+            <div class="logo">
+                <h1><i class="fas fa-baby"></i> Cuidança</h1>
+                <p>Sistema Hospitalar Pediátrico - Acesso à conta do seu filho</p>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username">Nome de Utilizador</label>
+                    <input type="text" id="username" class="form-control" placeholder="Digite o nome de utilizador" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Palavra-passe</label>
+                    <input type="password" id="password" class="form-control" placeholder="Digite a palavra-passe" required>
+                </div>
+                
+                <button type="submit" class="btn btn-block">
+                    <i class="fas fa-sign-in-alt"></i> Aceder à Conta
+                </button>
+            </form>
+            
+            <div class="demo-info">
+                <p>Para testar o sistema, utilize as seguintes credenciais:</p>
+                <p><span class="demo-credentials">Utilizador:</span> Pedro Lopes</p>
+                <p><span class="demo-credentials">Palavra-passe:</span> 2025</p>
+            </div>
+            
+            <div class="footer">
+                <p>Programado por Leonardo Cortês</p>
+                <p>&copy; 2025 - Todos os direitos reservados</p>
+            </div>
+        </div>
+        
+        <!-- Dashboard da Criança -->
+        <div class="dashboard" id="dashboard">
+            <div class="dashboard-header">
+                <div class="d-flex align-center">
+                    <div class="child-avatar">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <div class="child-info">
+                        <h1>Bem-vindo, Pedro Lopes!</h1>
+                        <p>Responsável pela criança: Maria Silva, 2 anos</p>
+                    </div>
+                </div>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Terminar Sessão
+                </button>
+            </div>
+            
+            <div class="dashboard-nav">
+                <div class="nav-item active" data-target="vacinas">
+                    <i class="fas fa-syringe"></i> Vacinas
+                </div>
+                <div class="nav-item" data-target="remedios">
+                    <i class="fas fa-pills"></i> Medicamentos
+                </div>
+                <div class="nav-item" data-target="consultas">
+                    <i class="fas fa-stethoscope"></i> Consultas
+                </div>
+                <div class="nav-item" data-target="enfermagem">
+                    <i class="fas fa-user-nurse"></i> Controlo de Enfermagem
+                </div>
+                <div class="nav-item" data-target="crescimento">
+                    <i class="fas fa-chart-line"></i> Crescimento
+                </div>
+                <div class="nav-item" data-target="exames">
+                    <i class="fas fa-file-medical"></i> Exames
+                </div>
+            </div>
+            
+            <!-- Conteúdo das seções -->
+            <div class="dashboard-content">
+                <!-- Vacinas -->
+                <div class="content-section active" id="vacinas">
+                    <div class="section-header">
+                        <h2>Registo de Vacinas</h2>
+                        <p>Histórico completo de vacinação da criança</p>
+                    </div>
+                    
+                    <div class="cards-grid">
+                        <div class="dashboard-card vaccine-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-syringe"></i> Próximas Vacinas</h3>
+                                <span class="card-badge">2 Pendentes</span>
+                            </div>
+                            <div class="card-content">
+                                <ul class="card-list">
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>VASPR (Sarampo, Papeira, Rubéola)</strong>
+                                            <p>Recomendada: 15 Jan 2025</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                        </div>
+                                        <span class="status status-pending">Agendada</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>DTPa (Difteria, Tétano, Tosse Convulsa)</strong>
+                                            <p>Recomendada: 20 Mar 2025</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                        </div>
+                                        <span class="status status-pending">Por agendar</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card vaccine-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-history"></i> Histórico de Vacinas</h3>
+                            </div>
+                            <div class="card-content">
+                                <ul class="card-list">
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>BCG (Tuberculose)</strong>
+                                            <p>Administrada: 15 Jan 2023</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                        </div>
+                                        <span class="status status-completed">Administrada</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Hepatite B</strong>
+                                            <p>Administrada: 20 Mar 2023</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                        </div>
+                                        <span class="status status-completed">Administrada</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Poliomielite</strong>
+                                            <p>Administrada: 15 Jun 2023</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                        </div>
+                                        <span class="status status-completed">Administrada</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-info-circle"></i> Informações sobre Vacinas</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>O calendário de vacinação segue as recomendações da Direção-Geral da Saúde para garantir a proteção da criança.</p>
+                                <button class="btn btn-block mt-4">
+                                    <i class="fas fa-download"></i> Descarregar Cartão de Vacinas
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Medicamentos -->
+                <div class="content-section" id="remedios">
+                    <div class="section-header">
+                        <h2>Medicamentos e Remédios</h2>
+                        <p>Registo de medicação prescrita e administrada</p>
+                    </div>
+                    
+                    <div class="cards-grid">
+                        <div class="dashboard-card medicine-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-pills"></i> Medicação Atual</h3>
+                                <span class="card-badge">3 Ativos</span>
+                            </div>
+                            <div class="card-content">
+                                <ul class="card-list">
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Paracetamol 120mg</strong>
+                                            <p>5ml a cada 8 horas | Para febre</p>
+                                            <small>Prescrito por: Dr. João Santos</small>
+                                        </div>
+                                        <span class="status status-pending">Ativo</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Amoxicilina 250mg</strong>
+                                            <p>2.5ml a cada 12 horas | Para infeção</p>
+                                            <small>Prescrito por: Dr. João Santos</small>
+                                        </div>
+                                        <span class="status status-pending">Ativo</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Vitamina D 400UI</strong>
+                                            <p>1 gota por dia | Suplemento</p>
+                                            <small>Prescrito por: Dra. Maria Costa</small>
+                                        </div>
+                                        <span class="status status-pending">Ativo</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card medicine-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-history"></i> Histórico de Medicação</h3>
+                            </div>
+                            <div class="card-content">
+                                <ul class="card-list">
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Ibuprofeno 100mg</strong>
+                                            <p>2.5ml a cada 8 horas | Para dor</p>
+                                        </div>
+                                        <span class="status status-completed">Terminado</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Xarope para tosse</strong>
+                                            <p>2.5ml a cada 12 horas</p>
+                                        </div>
+                                        <span class="status status-completed">Terminado</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-calendar-plus"></i> Lembretes de Medicação</h3>
+                            </div>
+                            <div class="card-content">
+                                <p>Ative os lembretes para não se esquecer de administrar a medicação à criança.</p>
+                                <button class="btn btn-block mt-4">
+                                    <i class="fas fa-bell"></i> Ativar Lembretes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Controlo de Enfermagem -->
+                <div class="content-section" id="enfermagem">
+                    <div class="section-header">
+                        <h2>Controlo de Enfermagem</h2>
+                        <p>Registo de procedimentos e observações da equipa de enfermagem</p>
+                    </div>
+                    
+                    <div class="cards-grid">
+                        <div class="dashboard-card nursing-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-notes-medical"></i> Últimos Controlos</h3>
+                                <span class="card-badge">5 Registos</span>
+                            </div>
+                            <div class="card-content">
+                                <ul class="card-list">
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Controlo de Sinais Vitais</strong>
+                                            <p>10 Nov 2024, 14:30</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                            <small>Temperatura: 36.8°C | Peso: 12.5kg</small>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Administração de Medicação</strong>
+                                            <p>10 Nov 2024, 08:15</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                            <small>Paracetamol 120mg - 5ml</small>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Curativo</strong>
+                                            <p>09 Nov 2024, 16:45</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                            <small>Ferida no joelho direito</small>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card nursing-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-procedures"></i> Procedimentos Agendados</h3>
+                                <span class="card-badge">2 Agendados</span>
+                            </div>
+                            <div class="card-content">
+                                <ul class="card-list">
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Troca de Curativo</strong>
+                                            <p>12 Nov 2024, 10:00</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                        </div>
+                                        <span class="status status-pending">Agendado</span>
+                                    </li>
+                                    <li>
+                                        <div class="list-item-content">
+                                            <strong>Avaliação de Desenvolvimento</strong>
+                                            <p>20 Nov 2024, 09:30</p>
+                                            <small>Enfermeira: Carolina dos Santos</small>
+                                        </div>
+                                        <span class="status status-pending">Agendado</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-user-nurse"></i> Equipa de Enfermagem</h3>
+                            </div>
+                            <div class="card-content">
+                                <p><strong>Enfermeira Responsável:</strong> Carolina dos Santos</p>
+                                <p><strong>Contacto:</strong> 912 345 678</p>
+                                <p><strong>Turno:</strong> Manhã (08:00 - 16:00)</p>
+                                <button class="btn btn-block mt-4">
+                                    <i class="fas fa-comment-medical"></i> Enviar Mensagem
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- As outras seções seguiriam o mesmo padrão -->
+                <div class="text-center mt-4">
+                    <p>As demais seções (Consultas, Crescimento, Exames) seguem o mesmo padrão de design.</p>
+                    <div class="d-flex justify-between align-center gap-2 mt-4" style="max-width: 500px; margin: 0 auto;">
+                        <button class="btn btn-outline" data-target="consultas">
+                            <i class="fas fa-stethoscope"></i> Consultas
+                        </button>
+                        <button class="btn btn-outline" data-target="crescimento">
+                            <i class="fas fa-chart-line"></i> Crescimento
+                        </button>
+                        <button class="btn btn-outline" data-target="exames">
+                            <i class="fas fa-file-medical"></i> Exames
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer do Dashboard -->
+            <div class="footer">
+                <p>Programado por Leonardo Cortês</p>
+                <p>&copy; 2025 - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Botão WhatsApp -->
+    <a href="https://wa.me/2389177161" class="whatsapp-btn" id="whatsappBtn" target="_blank" style="display: none;">
+        <i class="fab fa-whatsapp"></i>
+        <div class="whatsapp-tooltip">Fale connosco no WhatsApp</div>
+    </a>
+    
+    <!-- Popup de Erro -->
+    <div class="popup error" id="errorPopup">
+        <div class="popup-content">
+            <div class="popup-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Credenciais Incorretas</h3>
+            <p>O nome de utilizador ou palavra-passe que inseriu estão incorretos.</p>
+            <p>Por favor, tente novamente.</p>
+            <p>Esta janela fechará automaticamente em <span class="countdown" id="countdown">4</span> segundos.</p>
+        </div>
+    </div>
+    
+    <!-- Popup de Sucesso -->
+    <div class="popup success" id="successPopup">
+        <div class="popup-content">
+            <div class="popup-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Login Bem-Sucedido</h3>
+            <p>As suas credenciais foram validadas com sucesso.</p>
+            <p>Está a ser redirecionado para a área da criança...</p>
+        </div>
+    </div>
+
+    <script>
+        // Sistema de Login - CORRIGIDO
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Verificar credenciais - AGORA CORRETO
+            if (username === "Pedro Lopes" && password === "2025") {
+                // Login bem-sucedido
+                const successPopup = document.getElementById('successPopup');
+                successPopup.classList.add('active');
+                
+                // Redirecionar para dashboard após 2 segundos
+                setTimeout(function() {
+                    successPopup.classList.remove('active');
+                    document.getElementById('loginCard').style.display = 'none';
+                    document.getElementById('dashboard').classList.add('active');
+                    // Mostrar botão do WhatsApp após login
+                    document.getElementById('whatsappBtn').style.display = 'flex';
+                }, 2000);
+            } else {
+                // Exibir popup de erro
+                const errorPopup = document.getElementById('errorPopup');
+                errorPopup.classList.add('active');
+                
+                let seconds = 4;
+                const countdownElement = document.getElementById('countdown');
+                
+                const countdown = setInterval(function() {
+                    seconds--;
+                    countdownElement.textContent = seconds;
+                    
+                    if (seconds <= 0) {
+                        clearInterval(countdown);
+                        errorPopup.classList.remove('active');
+                        // Limpar campos do formulário
+                        document.getElementById('username').value = '';
+                        document.getElementById('password').value = '';
+                        document.getElementById('username').focus();
+                    }
+                }, 1000);
+            }
+        });
+        
+        // Botão de logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('dashboard').classList.remove('active');
+            document.getElementById('loginCard').style.display = 'block';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            // Esconder botão do WhatsApp após logout
+            document.getElementById('whatsappBtn').style.display = 'none';
+        });
+        
+        // Navegação entre seções
+        const navItems = document.querySelectorAll('.nav-item');
+        const contentSections = document.querySelectorAll('.content-section');
+        
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                
+                // Remover classe active de todos os itens
+                navItems.forEach(nav => nav.classList.remove('active'));
+                contentSections.forEach(section => section.classList.remove('active'));
+                
+                // Adicionar classe active ao item clicado
+                this.classList.add('active');
+                
+                // Mostrar a seção correspondente
+                document.getElementById(target).classList.add('active');
+            });
+        });
+        
+        // Botões de navegação alternativa
+        document.querySelectorAll('.btn-outline').forEach(button => {
+            button.addEventListener('click', function() {
+                const target = this.getAttribute('data-target');
+                
+                // Remover classe active de todos os itens
+                navItems.forEach(nav => nav.classList.remove('active'));
+                contentSections.forEach(section => section.classList.remove('active'));
+                
+                // Ativar a seção correspondente
+                document.querySelector(`.nav-item[data-target="${target}"]`).classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
